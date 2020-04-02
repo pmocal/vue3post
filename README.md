@@ -1,16 +1,5 @@
----
-layout: page-fullwidth
-title: 'What's Coming in Vue 3'
-categories:
-  - vuejs
-tags:
-  - composition
-  - vue3
-  - vue
-breadcrumb: true
-meta_description: "Vue 3.0 is coming out very soon! Get acquainted with what's being offered--you might be inclined to get started with it prior to its release."
-author: parthiv_mohan
----
+# Vue 3.0
+
 Vue 3.0 is coming out soon. Expect a faster, smaller, more maintainable, and easier to use version of the Vue you know and love. You can still use Vue via a script tag and your Vue 2.x code will continue to work. But you can start playing with the alpha version of Vue 3.0 [here](https://github.com/vuejs/vue-next) and we're going to get into some of what 3.0 is offering. Among other things, there is a new API for creating components. It doesn't introduce new concepts to Vue, but rather exposes Vue's core capabilities like creating and observing reactive state as standalone functions. This is ultimately useful to Vue developers at all levels.
 
 ## Options API and Composition API
@@ -21,7 +10,7 @@ In large components that encapsulate multiple logical tasks, you want to group c
 
 Vue 3 seeks to kill both birds with one stone by exposing a new API. This API will live alongside the Options API, not replace it. This means that you can go on building components in the way that you're used to without encountering any problems. But, you can also start building with the Composition API which provides more flexible code organization and logic reuse capabilities as well as other improvements. Even if the problems it specifically addresses are not pertinent to you, the new API has clearly had a lot of thought go into it to push Vue forward as a framework period (for instance, by reducing the extent to which Vue operates "magically" behind the scenes).
 
-### API 
+## Composition API 
 
 The Composition API is available now as a [plugin](https://github.com/vuejs/composition-api) for Vue 2.0 so you can try it out. It will be shipped built in to Vue 3.0 of course.
 
@@ -35,15 +24,24 @@ You would first `import { reactive } from 'vue'`. Then, you could create an obje
 
 You will have access to APIs that will allow you to dynamically inject component lifecycle hooks into a Vue instance.
 
-This happens in the `setup` function of the component that is created using the new API.
+The lifecycle registration methods can only be used in the `setup()` method which is the entry point where all the composition functions are called. For instance:
+
+```vuejs
+import { onMounted } from 'vue'
+export default {
+	setup() {
+		onMounted(() => {
+			console.log('component is mounted.')
+		})
+	}
+}
+```
 
 Functions that use these APIs can be imported into a component, allowing it to do multiple logical tasks with reusable and readable code.
 
-The API also offers excellent Typescript support.
+## Typescript
 
-### Typescript
-
-The composition API is also supposed to result in better type inferences with TypeScript. Bindings returned from `setup()` and `props` declarations are used to infer types.
+The composition API also offers better TypeScript support. It is supposed to result in better type inferences with bindings returned from `setup()` and `props` declarations used to infer types.
 
 Component code using TypeScript and JavaScript will look largely identical and TypeScript definitions benefit Javascript users as well, say, if they use an IDE.
 
@@ -75,4 +73,4 @@ Libraries like Vue Router and test-utils will be updated to line up with the new
 
 ## Conclusion
 
-There is a ton to look forward in Vue 3.0 with more like Fragments and Portals that we could not include here. The new Composition API moves us toward a more readable version of Vue. Get a head start now! 
+There is a ton to look forward in Vue 3.0 with [more](https://github.com/vuejs/rfcs/pulls?q=is%3Apr+is%3Amerged+label%3A3.x) like [Portals](https://github.com/LinusBorg/portal-vue) that couldn't fit in this post. The new Composition API moves us towards an all around better Vue. An exact release date is not set but it is coming soon. Get a head start now!
